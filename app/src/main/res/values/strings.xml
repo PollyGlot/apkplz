@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">#APKPLZ</string>
+
+    <!-- Toolbar Main -->
+    <string name="toolbar_main_search">Search</string>
+    <string name="toolbar_main_more">More</string>
+
+    <!-- Toolbar Add Item -->
+    <string name="toolbar_add_cancel">Cancel</string>
+    <string name="toolbar_add_upload">Upload</string>
+    <string name="toolbar_main_back">Back</string>
+
+    <!-- Navigation Title -->
+    <string name="title_home">Home</string>
+    <string name="title_developers">Developers</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- Fragments -->
+    <string name="fragment_home">Home</string>
+    <string name="fragment_developers_top">Top</string>
+    <string name="fragment_developers_all">All</string>
+    <string name="fragment_popular">Popular</string>
+    <string name="fragment_profile">Profile</string>
+
+</resources>
