@@ -1,7 +1,5 @@
 package com.example.pollyglot.apkplz;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,10 +24,6 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
     }
 

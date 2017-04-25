@@ -6,9 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
-    android:id="@+id/toolbar"
-    layout="@layout/toolbar"/>
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:fitsSystemWindows="true"
+        app:title="@string/add_apk_title"
+        app:theme="@style/APKPLZTheme" >
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_apk_title"
+            android:layout_gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+
+
 
 
 </LinearLayout>

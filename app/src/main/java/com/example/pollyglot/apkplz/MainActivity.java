@@ -5,20 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+//import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static enum Mode {
-        NORMAL, ADD, SEARCH;
-    }
-
-    public static Mode mode;
 
     private Toolbar mToolbar;
     private BottomNavigationView mBottomBar;
@@ -28,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mode = Mode.NORMAL;
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -52,39 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
-
-//        mBottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment selectedFragment = null;
-//                switch (item.getItemId()) {
-//                    case R.id.navigation_home:
-//                        selectedFragment = HomeFragment.newInstance();
-//                        break;
-//                    case R.id.navigation_developers:
-//                        selectedFragment = DevelopersTopFragment.newInstance();
-//                        break;
-//                    case R.id.navigation_popular:
-//                        selectedFragment = PopularFragment.newInstance();
-//                        break;
-//                    case R.id.navigation_profile:
-//                        selectedFragment = ProfileFragment.newInstance();
-//                        break;
-//                }
-//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.commit();
-//                return true;
-//            }
-//
-//        });
-//
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.frame_layout, HomeFragment.newInstance());
-//        transaction.commit();
-
     }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -97,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = HomeFragment.newInstance();
                     break;
                 case R.id.navigation_developers:
-                    selectedFragment = DevelopersTopFragment.newInstance();
+                    selectedFragment = DevelopersFragment.newInstance();
                     break;
                 case R.id.navigation_popular:
                     selectedFragment = PopularFragment.newInstance();
@@ -110,23 +74,23 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.frame_layout, selectedFragment);
             transaction.commit();
             return true;
-
-
         }
     };
 
+    // Toolbar Items on Main
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_more) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
