@@ -55,7 +55,7 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back">Go to Log In</string>
-    <string name="sign_out">Sign Out</string>
+    <string name="sign_out">Sign ut</string>
 
     <string name="facebook_app_id">101761610395605</string>
     <string name="login">Login</string>
