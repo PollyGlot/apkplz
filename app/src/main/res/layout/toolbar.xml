@@ -12,5 +12,4 @@
         android:fitsSystemWindows="true"
         app:title="@string/app_name"
         app:theme="@style/APKPLZTheme" >
-
 </android.support.v7.widget.Toolbar>

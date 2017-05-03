@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -27,9 +28,6 @@ public class DevelopersFragment extends Fragment {
         DevelopersFragment fragment = new DevelopersFragment();
         return fragment;
     }
-
-//    public TabLayout mTabLayout;
-//    public ViewPager mViewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
