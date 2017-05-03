@@ -9,18 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.pollyglot.apkplz.auth.ResetPasswordActivity;
-import com.example.pollyglot.apkplz.auth.SignupActivity;
-
+import com.example.pollyglot.apkplz.auth.LoginActivity;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener{
 
-    private OnFragmentInteractionListener mListener;
-    private Button mSignOut;
+//    private OnFragmentInteractionListener mListener;
     private View mView;
+    private FirebaseAuth mFirebaseAuth;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+
+    private Button signOut;
+    private Intent intent;
+
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
     public static ProfileFragment newInstance() {
@@ -36,17 +44,35 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
 
-//        mSignOut = (Button) mView.findViewById(R.id.sign_out);
-//        mSignOut.setOnClickListener(this);
-//        return mView;
+        View mView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        intent = new Intent(getActivity(), LoginActivity.class);
+
+        signOut = (Button) mView.findViewById(R.id.sign_out);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+        return mView;
     }
+
+    //sign out method
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        startActivity(intent);
+    }
+
 
     @Override
     public void onClick(View v) {
-
-
     }
 
 
