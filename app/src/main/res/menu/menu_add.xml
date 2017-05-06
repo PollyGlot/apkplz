@@ -4,18 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
-    android:id="@+id/action_cancel"
-    android:orderInCategory="100"
-    android:title="@string/toolbar_add_cancel"
-    android:icon="@drawable/ic_close"
-    app:showAsAction="ifRoom"/>
-
-    <item
-    android:id="@+id/action_add"
-    android:orderInCategory="300"
-    android:title="@string/toolbar_add_upload"
-    app:showAsAction="ifRoom"/>
-
-
+        android:id="@+id/action_add"
+        android:orderInCategory="200"
+        android:title="@string/toolbar_add_upload"
+        app:showAsAction="ifRoom"/>
 
 </menu>
