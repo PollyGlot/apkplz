@@ -17,6 +17,9 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Another method
+    // https://goo.gl/5YykEB
+
     private Toolbar mToolbar;
     private BottomNavigationView mBottomBar;
     private FloatingActionButton mFab;
@@ -43,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationViewHelper.disableShiftMode(mBottomBar);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, HomeFragment.newInstance());
+        transaction.replace(R.id.main_frame_layout, HomeFragment.newInstance());
+//        transaction.addToBackStack(null);
         transaction.commit();
 
         //Used to select an item programmatically
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_layout, selectedFragment);
+            transaction.replace(R.id.main_frame_layout, selectedFragment);
             transaction.commit();
             return true;
         }
