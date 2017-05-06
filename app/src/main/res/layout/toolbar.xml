@@ -8,8 +8,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:elevation="4dp"
+        android:elevation="0dp"
         android:fitsSystemWindows="true"
         app:title="@string/app_name"
-        app:theme="@style/APKPLZTheme" >
+        app:theme="@style/APKPLZTheme">
 </android.support.v7.widget.Toolbar>
