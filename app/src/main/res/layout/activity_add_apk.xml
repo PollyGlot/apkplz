@@ -1,34 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:elevation="4dp"
         android:fitsSystemWindows="true"
         app:title="@string/add_apk_title"
-        app:theme="@style/APKPLZTheme" >
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_apk_title"
-            android:layout_gravity="center"/>
+        app:theme="@style/APKPLZTheme">
     </android.support.v7.widget.Toolbar>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:isScrollContainer="false">
 
+        <RelativeLayout
+            android:id="@+id/add_apk_frame"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            tools:ignore="ScrollViewSize">
 
+            <LinearLayout
+                android:id="@+id/layout_choose_developer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_developers"
+                    />
+
+                <Spinner
+                    android:id="@+id/choose_developer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:dropDownWidth="wrap_content"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_choose_app_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_choose_developer">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_title"
+                    />
+
+                <Spinner
+                    android:id="@+id/choose_app_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_choose_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_choose_app_title">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_version"
+                    />
+
+                <Spinner
+                    android:id="@+id/choose_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_choose_min_max"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_choose_version">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_defrag"
+                    />
+
+                <Spinner
+                    android:id="@+id/min_android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_weight="1"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+
+                <Spinner
+                    android:id="@+id/max_android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_weight="1"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+                <!--style="@style/Widget.AppCompat.Spinner.Underlined"-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_choose_dpi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_choose_min_max">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_dpi"
+                    />
+
+                <Spinner
+                    android:id="@+id/choose_dpi_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_weight="1"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+
+                <Spinner
+                    android:id="@+id/choose_dpi_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_weight="1"
+                    android:gravity="clip_vertical"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/developers"
+                    android:prompt="@string/dev_prompt"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_what_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:layout_below="@id/layout_choose_dpi">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight="0"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_what_new"
+                    />
+
+                <EditText
+                    android:id="@+id/what_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false"
+                    android:hint="@string/what_new"
+                    android:inputType="textMultiLine"
+                    android:theme="@style/APKPLZTheme"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
