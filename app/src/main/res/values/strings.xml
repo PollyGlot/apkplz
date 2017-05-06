@@ -55,14 +55,36 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back">Go to Log In</string>
-    <string name="sign_out">Sign ut</string>
+    <string name="sign_out">Sign Out</string>
 
     <string name="facebook_app_id">101761610395605</string>
     <string name="login">Login</string>
     <string name="loading">Loading</string>
     <string name="login_with_google">Log In with Google</string>
+    <string name="choose_developer">Choose Developer</string>
 
 
-    <!--<string name="by_letter">by</string>-->
+    <string name="dev_prompt">Choose a Developer</string>
+    <string-array name="developers">
+        <item>Google</item>
+        <item>Facebook</item>
+        <item>Snapchat</item>
+        <item>Samsung</item>
+        <item>LG</item>
+        <item>Microsoft Corporation</item>
+        <item>Apple</item>
+    </string-array>
+
+    <string name="app_prompt">Choose a Developer</string>
+    <string name="what_new">What\'s New</string>
+    <string-array name="apps">
+        <item>Facebook</item>
+        <item>Snapchat</item>
+        <item>Google Home</item>
+        <item>Facebook Messenger</item>
+        <item>Google Maps - Navigation &amp; Transit</item>
+        <item>Pocket Casts</item>
+        <item>Play Store</item>
+    </string-array>
 
 </resources>
