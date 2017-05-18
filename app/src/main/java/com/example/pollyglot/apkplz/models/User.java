@@ -2,10 +2,10 @@ package com.example.pollyglot.apkplz.models;
 
 public class User {
 
-    private String id;
-    private String login;
-    private String email;
-    private String password;
+    public String id;
+    public String login;
+    public String email;
+    public String password;
 
 
     public User() {
