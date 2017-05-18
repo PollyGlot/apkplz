@@ -2,21 +2,26 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.example.pollyglot.apkplz.DevelopersFragment">
+             tools:context="com.example.pollyglot.apkplz.fragment.DevelopersFragment">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
-            android:elevation="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/APKPLZTheme"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/tab_layout"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:elevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/APKPLZTheme"
+        android:layout_below="@+id/toolbar"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/tab_layout"/>
 
 </RelativeLayout>

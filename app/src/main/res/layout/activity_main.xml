@@ -9,9 +9,10 @@
     android:orientation="vertical"
     tools:context="com.example.pollyglot.apkplz.MainActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
+    <!--<include-->
+        <!--android:id="@+id/toolbar"-->
+        <!--layout="@layout/toolbar"/>-->
+
 
     <FrameLayout
         android:id="@+id/main_frame_layout"
@@ -20,15 +21,25 @@
         android:layout_weight="1">
         <!--android:animateLayoutChanges="true">-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:tint="@android:color/white"
-            android:src="@android:drawable/ic_input_add"/>
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:id="@+id/showSnackbar"
+            >
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:elevation="6dp"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:tint="@android:color/white"
+                android:src="@android:drawable/ic_input_add"/>
+
+        </android.support.design.widget.CoordinatorLayout>
 
     </FrameLayout>
 
@@ -37,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:elevation="8dp"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/selector"
         app:itemTextColor="@color/selector"
