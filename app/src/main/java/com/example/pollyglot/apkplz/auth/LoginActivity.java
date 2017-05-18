@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pollyglot.apkplz.BaseActivity;
 import com.example.pollyglot.apkplz.MainActivity;
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.User;
@@ -32,7 +33,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "APKPLZ";
     public User user;
@@ -40,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressDialog mProgressDialog;
 
     private Button btnSignup;
     private Button btnLogin;
@@ -71,12 +71,12 @@ public class LoginActivity extends AppCompatActivity {
             // User is signed in
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             String uid = mFirebaseAuth.getCurrentUser().getUid();
-            String image = mFirebaseAuth.getCurrentUser().getPhotoUrl().toString();
+//            String image = mFirebaseAuth.getCurrentUser().getPhotoUrl().toString();
             intent.putExtra("user_id", uid);
 
-            if (image != null || image != "") {
-                intent.putExtra("profile_picture", image);
-            }
+//            if (image != null || image != "") {
+//                intent.putExtra("profile_picture", image);
+//            }
 
             startActivity(intent);
             finish();
@@ -149,8 +149,6 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseAuth.addAuthStateListener(mAuthListener);
     }
 
-
-
     @Override
     public void onStop() {
         super.onStop();
@@ -208,7 +206,9 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             String uid = mFirebaseAuth.getCurrentUser().getUid();
+                            String name = mFirebaseAuth.getCurrentUser().getDisplayName();
                             intent.putExtra("user_id", uid);
+                            intent.putExtra("user_name", name);
                             startActivity(intent);
                             finish();
                         }
@@ -265,11 +265,12 @@ public class LoginActivity extends AppCompatActivity {
                             String image = task.getResult().getUser().getPhotoUrl().toString();
 
                             //Create a new User and Save it in Firebase database
-                            User user = new User(uid, name, email, null);
+                            User user = new User(uid, name, email, image);
                             mDatabaseReference.child("users").child(uid).setValue(user);
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.putExtra("user_id", uid);
+                            intent.putExtra("user_name", name);
                             intent.putExtra("profile_picture", image);
                             startActivity(intent);
                             finish();
@@ -278,114 +279,4 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.loading));
-            mProgressDialog.setIndeterminate(true);
-        }
-
-        mProgressDialog.show();
-    }
-
-    public void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-
-
-
-
-
-    //    private EditText mInputEmail, mInputPassword;
-//    private FirebaseAuth mFirebaseAuth;
-//    private ProgressBar mProgressBar;
-//    private Button btnSignup, btnLogin, btnReset;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        //Get Firebase mFirebaseAuth instance
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//
-//        if (mFirebaseAuth.getCurrentUser() != null) {
-//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//            finish();
-//        }
-//
-//        // set the view now
-//        setContentView(R.layout.activity_login);
-//
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        mInputEmail = (EditText) findViewById(R.id.email);
-//        mInputPassword = (EditText) findViewById(R.id.password);
-//        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-//        btnSignup = (Button) findViewById(R.id.btn_signup);
-//        btnLogin = (Button) findViewById(R.id.btn_login);
-//        btnReset = (Button) findViewById(R.id.btn_reset_password);
-//
-//        //Get Firebase mFirebaseAuth instance
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//
-//        btnSignup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-//            }
-//        });
-//
-//        btnReset.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
-//            }
-//        });
-//
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String email = mInputEmail.getText().toString();
-//                final String password = mInputPassword.getText().toString();
-//
-//                if (TextUtils.isEmpty(email)) {
-//                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                if (TextUtils.isEmpty(password)) {
-//                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                mProgressBar.setVisibility(View.VISIBLE);
-//
-//                //authenticate user
-//                mFirebaseAuth.signInWithEmailAndPassword(email, password)
-//                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                mProgressBar.setVisibility(View.GONE);
-//                                if (!task.isSuccessful()) {
-//                                    // there was an error
-//                                    if (password.length() < 6) {
-//                                        mInputPassword.setError(getString(R.string.minimum_password));
-//                                    } else {
-//                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-//                                    }
-//                                } else {
-//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
-//                                }
-//                            }
-//                        });
-//            }
-//        });
-//    }
 }

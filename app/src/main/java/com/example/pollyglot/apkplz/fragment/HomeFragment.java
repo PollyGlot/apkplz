@@ -1,15 +1,18 @@
-package com.example.pollyglot.apkplz;
+package com.example.pollyglot.apkplz.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.pollyglot.apkplz.R;
+
 public class HomeFragment extends Fragment {
 
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
+    private Toolbar mToolbar;
 
     // TODO: Rename and change types of parameters
 //    private String mParam1;
@@ -35,11 +38,18 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+//        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        View mView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mToolbar = (Toolbar) mView.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mToolbar);
+
+        return mView;
     }
 
 
-    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
 //            mListener.onFragmentInteraction(uri);
@@ -64,7 +74,6 @@ public class HomeFragment extends Fragment {
 //    }
 
 //    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
 //        void onFragmentInteraction(Uri uri);
 //    }
 }

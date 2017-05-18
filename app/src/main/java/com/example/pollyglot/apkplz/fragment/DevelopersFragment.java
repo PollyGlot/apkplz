@@ -1,21 +1,16 @@
-package com.example.pollyglot.apkplz;
+package com.example.pollyglot.apkplz.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.pollyglot.apkplz.R;
 
 public class DevelopersFragment extends Fragment {
 
@@ -72,8 +67,6 @@ public class DevelopersFragment extends Fragment {
     public class PagerAdapter extends FragmentStatePagerAdapter {
         int mNumOfTabs;
 
-//        private String[] tabTitles = new String[]{"Top Developers", "All Developers"};
-
         public PagerAdapter(FragmentManager fm, int NumOfTabs) {
             super(fm);
             this.mNumOfTabs = NumOfTabs;
@@ -97,8 +90,6 @@ public class DevelopersFragment extends Fragment {
         }
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
 //            mListener.onFragmentInteraction(uri);
@@ -123,7 +114,6 @@ public class DevelopersFragment extends Fragment {
 //    }
 
 //    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
 //        void onFragmentInteraction(Uri uri);
 //    }
 }

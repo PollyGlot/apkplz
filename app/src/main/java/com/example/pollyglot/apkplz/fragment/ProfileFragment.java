@@ -1,4 +1,4 @@
-package com.example.pollyglot.apkplz;
+package com.example.pollyglot.apkplz.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.auth.LoginActivity;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
