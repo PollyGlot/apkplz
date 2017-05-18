@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">#APKPLZ</string>
+    <string name="add_developer">Ajouter</string>
+    <string name="title_profile">Moi</string>
+    <string name="version">Version</string>
+    <string name="what_new">Quoi de neuf ?</string>
+    <string name="title_developers">Développeurs</string>
+    <string name="title_home">Acuille</string>
+    <string name="title_popular">Populaire</string>
+    <string name="loading">Chargement</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="login"></string>
+    <string name="title_activity_signup">Se connecter</string>
+    <string name="toolbar_main_search">Chercher</string>
+    <string name="tab_title_top_dev">Top</string>
+    <string name="tab_title_all_dev">Tous</string>
+    <string name="add_apk_title">Ajouter l\'APK</string>
+    <string name="toolbar_add_upload">Enregistrer</string>
+</resources>

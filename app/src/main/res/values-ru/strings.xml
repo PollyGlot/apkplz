@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">#APKPLZ</string>
+    <string name="title_home">Главная</string>
+    <string name="title_popular">Популярное</string>
+    <string name="title_profile">Профиль</string>
+    <string name="toolbar_add_upload">Загрузить</string>
+    <string name="toolbar_main_back">Назад</string>
+    <string name="toolbar_main_search">Поиск</string>
+    <string name="version">Версия</string>
+    <string name="what_new">Что нового?</string>
+    <string name="title_activity_signup"></string>
+    <string name="title_activity_login">Войти</string>
+    <string name="sign_out">Выйти</string>
+    <string name="title_developers"></string>
+</resources>
