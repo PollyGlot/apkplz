@@ -15,13 +15,15 @@ public class Apk {
     public String minAndroidVersion;
     public String maxAndroidVersion;
     public String dpi;
+    public String icon;
     public String description;
 
     public Apk() {
     }
 
     public Apk(String uid, String developer, String title, String version,
-               String minAndroidVersion, String maxAndroidVersion, String dpi, String description) {
+               String minAndroidVersion, String maxAndroidVersion, String dpi,
+               String icon, String description) {
 //        this.uid = uid;
         this.developer = developer;
         this.title = title;
@@ -29,6 +31,7 @@ public class Apk {
         this.minAndroidVersion= minAndroidVersion;
         this.maxAndroidVersion = maxAndroidVersion;
         this.dpi = dpi;
+        this.icon = icon;
         this.description = description;
     }
 
@@ -88,6 +91,14 @@ public class Apk {
 
     public void setDpi(String dpi) {
         this.dpi = dpi;
+    }
+
+    public void setIcon(String icon){
+        this.icon = icon;
+    }
+
+    public String getIcon(){
+        return icon;
     }
 
     public String getDescription() {
