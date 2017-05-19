@@ -252,13 +252,29 @@ public class AddApkActivity extends BaseActivity {
         final String titleName = mAddField.getText().toString();
         final String devName = mSpinnerDev.getSelectedItem().toString();
 
-        String devKey = mDatabase.child("developers").push().getKey();
-        String key = mDatabase.child("app_titles").push().getKey();
+        mDatabase.child("developers")
+                .orderByChild("developer")
+                .equalTo(devName)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot devSnapshot : dataSnapshot.getChildren()) {
+                            String devKey = devSnapshot.getKey();
 
-        Apk apk = new Apk();
-        apk.setTitle(titleName);
-        mDatabase.child("app_titles").child(key).setValue(apk);
+                            String key = mDatabase.child("app_titles").push().getKey();
+                            Apk apk = new Apk();
 
+                            apk.setTitle(titleName);
+                            apk.setDeveloper(devKey);
+                            mDatabase.child("app_titles").child(key).setValue(apk);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
         Toast.makeText(this, "Adding...", Toast.LENGTH_SHORT).show();
     }
 
@@ -416,9 +432,6 @@ public class AddApkActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
 }
 
 
