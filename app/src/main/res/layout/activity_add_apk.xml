@@ -23,12 +23,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <FrameLayout
                 android:id="@+id/app_logo"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@color/colorAccent"
                 />
+
+            <ImageView
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="false"
+                android:layout_centerVertical="false"
+                android:background="@color/colorPrimary"
+                android:baselineAlignBottom="false"
+                android:fitsSystemWindows="false"/>
 
             <RelativeLayout
                 android:id="@+id/add_apk_frame"
@@ -68,8 +79,6 @@
                         style="@style/Widget.AppCompat.Spinner.Underlined"
 
                         />
-                        <!--android:prompt="@string/dev_prompt"-->
-                        <!--android:entries="@array/developers"-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,8 +109,6 @@
                         style="@style/Widget.AppCompat.Spinner.Underlined"
 
                         />
-                        <!--android:prompt="@string/dev_prompt"-->
-                        <!--android:entries="@array/developers"-->
 
                 </LinearLayout>
 
@@ -130,7 +137,8 @@
                         android:hint="@string/version"
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
-                        android:paddingEnd="40dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
                         android:gravity="clip_vertical"
                         android:spinnerMode="dropdown"
                         android:backgroundTint="@color/colorPrimaryDark"
@@ -269,6 +277,7 @@
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
                         android:overScrollMode="always"
+                        android:paddingStart="10dp"
                         android:scrollbarStyle="insideInset"
                         android:scrollbars="vertical"
                         android:scrollHorizontally="false"
