@@ -1,5 +1,6 @@
 package com.example.pollyglot.apkplz.adapters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
+import com.example.pollyglot.apkplz.DevDetailActivity;
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
 import com.example.pollyglot.apkplz.viewholder.DevTopViewHolder;
@@ -91,23 +93,10 @@ public abstract class DevTopListFragment extends Fragment {
                 });
 
                 viewHolder.bindToDevTop(model);
-//                setAnimation(viewHolder.itemView, position);
             }
         };
         mRecycler.setAdapter(mAdapter);
     }
-
-//    private int lastPosition = -1;
-//
-//    private void setAnimation(View viewToAnimate, int position) {
-//        // If the bound view wasn't previously displayed on screen, it's animated
-//        if (position > lastPosition) {
-//            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//            anim.setDuration(new Random().nextInt(501));//to make duration random number between [0,501)
-//            viewToAnimate.startAnimation(anim);
-//            lastPosition = position;
-//        }
-//    }
 
     @Override
     public void onDestroy() {
@@ -118,5 +107,4 @@ public abstract class DevTopListFragment extends Fragment {
     }
 
     public abstract Query getQuery(DatabaseReference databaseReference);
-
 }
