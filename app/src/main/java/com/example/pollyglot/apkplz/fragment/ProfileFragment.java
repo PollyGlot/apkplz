@@ -1,13 +1,20 @@
 package com.example.pollyglot.apkplz.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.auth.LoginActivity;
@@ -18,28 +25,27 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener{
 
-//    private OnFragmentInteractionListener mListener;
     private View mView;
     private FirebaseAuth mFirebaseAuth;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
-    private Button signOut;
-    private Intent intent;
+    private Toolbar mToolbar;
 
 
     public ProfileFragment() {
     }
 
     public static ProfileFragment newInstance() {
-        ProfileFragment fragment = new ProfileFragment();
-        return fragment;
+        return new ProfileFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
@@ -52,56 +58,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         mDatabaseReference = mFirebaseDatabase.getReference();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        intent = new Intent(getActivity(), LoginActivity.class);
+        mToolbar = (Toolbar) mView.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mToolbar);
 
-        signOut = (Button) mView.findViewById(R.id.sign_out);
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
         return mView;
     }
 
-    //sign out method
-    public void signOut() {
-        FirebaseAuth.getInstance().signOut();
-        LoginManager.getInstance().logOut();
-        startActivity(intent);
-    }
-
-
     @Override
     public void onClick(View v) {
-    }
-
-
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 }
