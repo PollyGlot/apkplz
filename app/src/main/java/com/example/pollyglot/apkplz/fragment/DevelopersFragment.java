@@ -6,7 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,14 +19,12 @@ import com.example.pollyglot.apkplz.R;
 
 public class DevelopersFragment extends Fragment {
 
-    public DevelopersFragment() {
-        // Required empty public constructor
-    }
+    private Toolbar mToolbar;
 
-    // TODO: Rename and change types and number of parameters
+    public DevelopersFragment() {}
+
     public static DevelopersFragment newInstance() {
-        DevelopersFragment fragment = new DevelopersFragment();
-        return fragment;
+        return new DevelopersFragment();
     }
 
     @Override
@@ -31,14 +34,18 @@ public class DevelopersFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_developers, container, false);
+        View mView = inflater.inflate(R.layout.fragment_developers, container, false);
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        mToolbar = (Toolbar) mView.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mToolbar);
+
+        TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_top_dev));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_all_dev));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
+        final ViewPager viewPager = (ViewPager) mView.findViewById(R.id.pager);
 
         viewPager.setAdapter(new PagerAdapter(getFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -61,7 +68,8 @@ public class DevelopersFragment extends Fragment {
             }
         });
 
-        return view;
+        setHasOptionsMenu(true);
+        return mView;
     }
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -90,30 +98,25 @@ public class DevelopersFragment extends Fragment {
         }
     }
 
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.menu_main, menu);
 //    }
 //
 //    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.settings:
+//                return true;
 //
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-
-//    public interface OnFragmentInteractionListener {
-//        void onFragmentInteraction(Uri uri);
+//            case R.id.about:
+//                return true;
+//
+//            default:
+//                break;
+//        }
+//
+//        return false;
 //    }
 }
