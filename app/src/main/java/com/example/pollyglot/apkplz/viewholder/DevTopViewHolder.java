@@ -7,6 +7,10 @@ import android.widget.TextView;
 
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class DevTopViewHolder extends RecyclerView.ViewHolder {
 
@@ -25,9 +29,9 @@ public class DevTopViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindToDevTop(Apk apk) {
-//        devTimeView.setText(apk.time);
+        devTimeView.setText("Latest Update " + apk.title);
         devNameView.setText(apk.developer);
-        numAppView.setText(apk.numApp + " Apps");
+//        numAppView.setText(appsNumber + " Apps");
 
     }
 }
