@@ -11,8 +11,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 //import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.example.pollyglot.apkplz.auth.LoginActivity;
 import com.example.pollyglot.apkplz.fragment.DevelopersFragment;
 import com.example.pollyglot.apkplz.fragment.HomeFragment;
 import com.example.pollyglot.apkplz.fragment.PopularFragment;
@@ -22,13 +24,17 @@ import com.example.pollyglot.apkplz.models.User;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     // Another method
     // https://goo.gl/5YykEB
@@ -40,27 +46,32 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private FirebaseDatabase mFirebaseDatabase;
 
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mUser;
+    private RecyclerView.OnScrollListener scrollListener;
+    private Intent mIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mIntent = new Intent(this, LoginActivity.class);
 
 //        Snackbar snackbar = Snackbar
 //                .make(findViewById(R.id.showSnackbar),
-//                        "Logged in as "+user.getEmail()+". ", Snackbar.LENGTH_LONG);
+//                        "Logged in as hello world", Snackbar.LENGTH_LONG);
 //        snackbar.show();
 
 
 //        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(mToolbar);
-
 
 
         mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -69,8 +80,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent Intent = new Intent(view.getContext(), AddApkActivity.class);
                 view.getContext().startActivity(Intent);
+//                Snackbar snackbar = Snackbar
+//                    .make(findViewById(R.id.main_frame_layout),
+//                        "Logged in as hello world", Snackbar.LENGTH_LONG);
+//                snackbar.show();
             }
         });
+
+//        scrollListener = new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState > 0) {
+//                    mFab.hide();
+//                } else {
+//                    mFab.show();
+//                }
+//            }
+//        };
 
         mBottomBar = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -79,9 +106,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame_layout, HomeFragment.newInstance());
         transaction.commit();
-
-        //Used to select an item programmatically
-        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -111,6 +135,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //sign out method
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        startActivity(mIntent);
+    }
 
     // Toolbar Items on Main
     @Override
@@ -121,14 +151,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.settings:
 
-        if (id == R.id.action_more) {
-            return true;
+                return true;
+
+            case R.id.about:
+                Intent startAboutActivity = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(startAboutActivity);
+                return true;
+
+            case R.id.logout:
+                signOut();
+                return true;
+
+            default:
+                break;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
-
-
-
 }
