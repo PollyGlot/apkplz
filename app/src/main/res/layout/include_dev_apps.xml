@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    
+    <ImageView
+        android:id="@+id/dev_app_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/fb_icon"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/messenger_icon"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/fb_manager_icon"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+
+        android:src="@drawable/fb_lite_icon"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/messenger_lite_icon"/>
+
+    <TextView
+        android:id="@+id/dev_num_of_apps"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="12 apps"
+        android:textAllCaps="true"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"/>
+
+</LinearLayout>

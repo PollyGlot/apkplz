@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.pollyglot.apkplz.fragment.ProfileFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.pollyglot.apkplz.fragment.ProfileFragment">
 
 
     <include
@@ -10,24 +10,39 @@
         layout="@layout/toolbar"/>
 
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment_profile"
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_below="@id/toolbar"
         />
 
-    <Button
-        android:id="@+id/sign_out"
+    <TextView
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/text"
-        android:background="@color/colorAccent"
-        android:text="@string/sign_out"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold" />
+        android:layout_below="@+id/avatar"
+        />
+
+    <!--<com.facebook.login.widget.ProfilePictureView-->
+        <!--xmlns:facebook="http://schemas.android.com/apk/res-auto"-->
+
+        <!--android:id="@+id/avatar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/sign_out"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_below="@id/text"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--android:text="@string/sign_out"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:textStyle="bold" />-->
         <!--style="?android:textAppearanceSmall"-->
 
 </RelativeLayout>

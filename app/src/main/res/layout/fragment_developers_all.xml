@@ -1,13 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.pollyglot.apkplz.fragment.DevelopersAllFragment">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="4dp"
+    tools:context="com.example.pollyglot.apkplz.fragment.DevelopersTopFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/dev_all_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:text="@string/fragment_developers_all"/>
+        android:elevation="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/developers_all_list">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

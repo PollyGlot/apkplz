@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:fitsSystemWindows="true"
-                                                 tools:context="com.example.pollyglot.apkplz.auth.LoginActivity">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.pollyglot.apkplz.auth.LoginActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -14,7 +15,6 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="32dp">
-
 
         <ImageView
             android:layout_width="@dimen/logo_w_h"
@@ -59,7 +59,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:background="@null"
+            android:foreground="?attr/selectableItemBackground"
             android:text="@string/btn_forgot_password"
             android:layout_gravity="end"
             android:textAllCaps="false"
@@ -70,39 +73,55 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/btn_login"
             android:background="@drawable/button_shape"
+            android:foreground="?attr/selectableItemBackground"
             style="@style/Base.Widget.AppCompat.Button.Colored"
 
             />
+
+        <com.facebook.login.widget.LoginButton
+            xmlns:facebook="http://schemas.android.com/apk/res-auto"
+
+            android:id="@+id/button_facebook_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:elevation="2dp"
+            android:paddingBottom="14dp"
+            android:paddingTop="14dp"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            facebook:com_facebook_login_text="Facebook Login"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
 
-            <com.facebook.login.widget.LoginButton
-                xmlns:facebook="http://schemas.android.com/apk/res-auto"
+            <!--<com.facebook.login.widget.LoginButton-->
+                <!--xmlns:facebook="http://schemas.android.com/apk/res-auto"-->
 
-                android:id="@+id/button_facebook_login"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="4dp"
-                android:elevation="2dp"
-                android:paddingBottom="11dp"
-                android:paddingTop="11dp"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                facebook:com_facebook_login_text="Facebook Login"/>
+                <!--android:id="@+id/button_facebook_login"-->
+                <!--android:layout_width="170dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:elevation="2dp"-->
+                <!--android:paddingBottom="11dp"-->
+                <!--android:paddingTop="11dp"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textStyle="normal"-->
+                <!--facebook:com_facebook_login_text="Facebook Login"/>-->
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/login_with_google"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:text="@string/login_with_google"
-                android:layout_alignParentEnd="true"
-                />
+            <!--<com.google.android.gms.common.SignInButton-->
+                <!--android:id="@+id/login_with_google"-->
+                <!--android:layout_width="170dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/login_with_google"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--/>-->
         </RelativeLayout>
     </LinearLayout>
 
@@ -112,7 +131,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@drawable/button_top_border"
-        android:paddingBottom="20dp"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:foreground="?attr/selectableItemBackground"        android:paddingBottom="20dp"
         android:paddingTop="20dp"
         android:text="@string/btn_link_to_register"
         android:textAllCaps="false"

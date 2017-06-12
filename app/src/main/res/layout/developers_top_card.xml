@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_margin="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
+
+        <include
+            android:id="@+id/dev_time_layout"
+            layout="@layout/include_dev_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/dev_top_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google Inc."
+            android:layout_below="@+id/dev_time_layout"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp"
+            />
+
+        <include
+            android:id="@+id/dev_apps_layout"
+            layout="@layout/include_dev_apps"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dev_top_title"
+            android:layout_marginTop="24dp"
+            />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

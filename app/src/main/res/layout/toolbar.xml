@@ -10,6 +10,7 @@
         android:minHeight="?attr/actionBarSize"
         android:elevation="4dp"
         android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|enterAlways"
         app:title="@string/app_name"
         app:theme="@style/APKPLZTheme">
 </android.support.v7.widget.Toolbar>
