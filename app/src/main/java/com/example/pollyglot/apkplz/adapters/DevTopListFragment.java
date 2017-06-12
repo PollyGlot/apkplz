@@ -79,16 +79,15 @@ public abstract class DevTopListFragment extends Fragment {
             protected void populateViewHolder(final DevTopViewHolder viewHolder, final Apk model, final int position) {
                 final DatabaseReference devRef = getRef(position);
 
-                // Set click listener for the whole post view
+                // Set click listener for the whole devCard view
                 final String devKey = devRef.getKey();
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        // TODO create DevDetail Activity
-//                        Intent intent = new Intent(getActivity(), DevDetailActivity.class);
-//                        intent.putExtra(DevDetailActivity.EXTRA_POST_KEY, devKey);
-//                        startActivity(intent);
+                        // Launch DevDetailActivity
+                        Intent intent = new Intent(getActivity(), DevDetailActivity.class);
+                        intent.putExtra(DevDetailActivity.EXTRA_DEV_KEY, devKey);
+                        startActivity(intent);
                     }
                 });
 

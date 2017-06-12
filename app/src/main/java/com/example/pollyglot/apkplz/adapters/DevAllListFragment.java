@@ -1,5 +1,6 @@
 package com.example.pollyglot.apkplz.adapters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
+import com.example.pollyglot.apkplz.DevDetailActivity;
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
 import com.example.pollyglot.apkplz.viewholder.DevAllViewHolder;
@@ -88,10 +90,9 @@ public abstract class DevAllListFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         // Launch PostDetailActivity
-                        // TODO create DevDetail Activity
-//                        Intent intent = new Intent(getActivity(), DevDetailActivity.class);
-//                        intent.putExtra(DevDetailActivity.EXTRA_POST_KEY, devKey);
-//                        startActivity(intent);
+                        Intent intent = new Intent(getActivity(), DevDetailActivity.class);
+                        intent.putExtra(DevDetailActivity.EXTRA_DEV_KEY, devKey);
+                        startActivity(intent);
                     }
                 });
 
