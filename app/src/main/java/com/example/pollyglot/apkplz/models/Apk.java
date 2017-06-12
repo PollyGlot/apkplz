@@ -1,14 +1,13 @@
 package com.example.pollyglot.apkplz.models;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Apk {
 
-//    public String uid;
     public String developer;
     public String title;
     public String version;
@@ -17,33 +16,31 @@ public class Apk {
     public String dpi;
     public String icon;
     public String description;
+    public String imageUrl;
+    public String fileUrl;
+
+    HashMap<String, Object> timestampCreated;
 
     public Apk() {
     }
 
-    public Apk(String uid, String developer, String title, String version,
+    public Apk(String developer, String title, String version,
                String minAndroidVersion, String maxAndroidVersion, String dpi,
-               String icon, String description) {
-//        this.uid = uid;
+               String description, String imageUrl, String fileUrl) {
         this.developer = developer;
         this.title = title;
         this.version = version;
         this.minAndroidVersion= minAndroidVersion;
         this.maxAndroidVersion = maxAndroidVersion;
         this.dpi = dpi;
-        this.icon = icon;
         this.description = description;
+        this.imageUrl = imageUrl;
+        this.fileUrl = fileUrl;
+
+//        HashMap<String, Object> timestampNow = new HashMap<>();
+//        timestampNow.put("timestamp", ServerValue.TIMESTAMP);
+//        this.timestampCreated = timestampNow;
     }
-
-
-//
-//    public String getUid() {
-//        return uid;
-//    }
-//
-//    public void setUid(String uid) {
-//        this.uid = uid;
-//    }
 
     public String getDeveloper() {
         return developer;
@@ -109,18 +106,51 @@ public class Apk {
         this.description = description;
     }
 
-//    @Exclude
-//    public Map<String, Object> toMap() {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("uid", uid);
-//        result.put("developer", developer);
-//        result.put("title", title);
-//        result.put("version", version);
-//        result.put("minAndroid", minAndroid);
-//        result.put("maxAndroid", maxAndroid);
-//        result.put("dpi", dpi);
-//        result.put("description", description);
-//
-//        return result;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
+//    public String getNumApp() {
+//        return numApp;
 //    }
+//
+//    public void setNumApp(String numApp) {
+//        this.numApp = numApp;
+//    }
+
+    public HashMap<String, Object> getTimestampCreated(){
+        return timestampCreated;
+    }
+
+    @Exclude
+    public long getTimestampCreatedLong(){
+        return (long)timestampCreated.get("timestamp");
+    }
+
+    @Exclude
+    public Map<String, Object> apkMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("developer", developer);
+        result.put("title", title);
+        result.put("version", version);
+        result.put("minAndroid", minAndroidVersion);
+        result.put("maxAndroid", maxAndroidVersion);
+        result.put("dpi", dpi);
+        result.put("description", description);
+        result.put("imageUrl", imageUrl);
+//        result.put("time", timestampCreated);
+        return result;
+    }
 }
