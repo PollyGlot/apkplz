@@ -262,7 +262,7 @@ public class LoginActivity extends BaseActivity {
                             String image = task.getResult().getUser().getPhotoUrl().toString();
 
                             //Create a new User and Save it in Firebase database
-                            User user = new User(uid, name, email, image);
+                            User user = new User(uid, name, email, null, image);
                             mDatabaseReference.child("users").child(uid).setValue(user);
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

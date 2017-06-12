@@ -117,13 +117,13 @@ public class SignupActivity extends AppCompatActivity {
 
     private void onAuthenticationSuccess(FirebaseUser mUser) {
         // Write new user
-        saveNewUser(mUser.getUid(), user.getLogin(), user.getEmail(), user.getPassword());
+        saveNewUser(mUser.getUid(), user.getLogin(), user.getEmail(), user.getPassword(), user.getAvatar());
         startActivity(new Intent(SignupActivity.this, MainActivity.class));
         finish();
     }
 
-    private void saveNewUser(String userId, String name, String email, String password) {
-        User user = new User(userId,name,email,password);
+    private void saveNewUser(String userId, String name, String email, String password, String avatar) {
+        User user = new User(userId,name,email,password, avatar);
 
         mDatabaseReference.child("users").child(userId).setValue(user);
     }
