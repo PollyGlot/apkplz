@@ -1,10 +1,14 @@
 package com.example.pollyglot.apkplz.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,32 +18,21 @@ public class HomeFragment extends Fragment {
 
     private Toolbar mToolbar;
 
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
+    public HomeFragment() {}
 
-//    private OnFragmentInteractionListener mListener;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
+        return new HomeFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_home, container, false);
-
         View mView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mToolbar = (Toolbar) mView.findViewById(R.id.toolbar);
@@ -49,31 +42,27 @@ public class HomeFragment extends Fragment {
         return mView;
     }
 
-
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
 //    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        menu.clear();
+//        inflater.inflate(R.menu.menu_main, menu);
+//
 //    }
-
+//
 //    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-
-//    public interface OnFragmentInteractionListener {
-//        void onFragmentInteraction(Uri uri);
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.settings:
+//                return true;
+//
+//            case R.id.about:
+//                return true;
+//
+//            default:
+//                break;
+//        }
+//
+//        return false;
 //    }
 }
