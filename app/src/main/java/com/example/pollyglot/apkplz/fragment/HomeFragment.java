@@ -13,8 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pollyglot.apkplz.R;
+import com.example.pollyglot.apkplz.adapters.HomeAppsListFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends HomeAppsListFragment {
 
     private Toolbar mToolbar;
 
@@ -42,27 +48,10 @@ public class HomeFragment extends Fragment {
         return mView;
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        menu.clear();
-//        inflater.inflate(R.menu.menu_main, menu);
-//
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.settings:
-//                return true;
-//
-//            case R.id.about:
-//                return true;
-//
-//            default:
-//                break;
-//        }
-//
-//        return false;
-//    }
+    @Override
+    public Query getQuery(final DatabaseReference databaseReference) {
+        Query homeAppsQuery = databaseReference.child("apps").orderByKey().limitToFirst(100);
+        return homeAppsQuery;
+    }
+
 }

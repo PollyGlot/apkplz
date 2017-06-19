@@ -36,7 +36,7 @@ public class DevelopersTopFragment extends DevTopListFragment {
     @Override
     public Query getQuery(final DatabaseReference databaseReference) {
 
-        Query devTopQuery = databaseReference.child("developers").orderByChild("title").limitToFirst(10);
+        Query devTopQuery = databaseReference.child("developers").limitToFirst(10);
         return devTopQuery;
     }
 }
