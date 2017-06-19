@@ -17,6 +17,7 @@ import android.view.animation.ScaleAnimation;
 import com.example.pollyglot.apkplz.DevDetailActivity;
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
+import com.example.pollyglot.apkplz.models.Developer;
 import com.example.pollyglot.apkplz.viewholder.DevAllViewHolder;
 import com.example.pollyglot.apkplz.viewholder.DevTopViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -34,7 +35,7 @@ public abstract class DevAllListFragment extends Fragment {
     private DatabaseReference mDatabase;
     // [END define_database_reference]
 
-    private FirebaseRecyclerAdapter<Apk, DevAllViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<Developer, DevAllViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
     private DividerItemDecoration mDividerItemDecoration;
@@ -78,10 +79,10 @@ public abstract class DevAllListFragment extends Fragment {
 
         // Set up FirebaseRecyclerAdapter with the Query
         Query allDevQuery = getQuery(mDatabase);
-        mAdapter = new FirebaseRecyclerAdapter<Apk, DevAllViewHolder>(Apk.class, R.layout.developers_all_list,
+        mAdapter = new FirebaseRecyclerAdapter<Developer, DevAllViewHolder>(Developer.class, R.layout.developers_all_list,
                 DevAllViewHolder.class, allDevQuery) {
             @Override
-            protected void populateViewHolder(final DevAllViewHolder viewHolder, final Apk model, final int position) {
+            protected void populateViewHolder(final DevAllViewHolder viewHolder, final Developer model, final int position) {
                 final DatabaseReference devRef = getRef(position);
 
                 // Set click listener for the whole item view

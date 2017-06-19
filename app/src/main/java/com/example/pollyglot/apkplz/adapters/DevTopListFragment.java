@@ -17,6 +17,7 @@ import android.view.animation.ScaleAnimation;
 import com.example.pollyglot.apkplz.DevDetailActivity;
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
+import com.example.pollyglot.apkplz.models.Developer;
 import com.example.pollyglot.apkplz.viewholder.DevTopViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +34,7 @@ public abstract class DevTopListFragment extends Fragment {
     private DatabaseReference mDatabase;
     // [END define_database_reference]
 
-    private FirebaseRecyclerAdapter<Apk, DevTopViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<Developer, DevTopViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
     private FloatingActionButton mFab;
@@ -73,10 +74,10 @@ public abstract class DevTopListFragment extends Fragment {
 
         // Set up FirebaseRecyclerAdapter with the Query
         Query topDevQuery = getQuery(mDatabase);
-        mAdapter = new FirebaseRecyclerAdapter<Apk, DevTopViewHolder>(Apk.class, R.layout.developers_top_card,
+        mAdapter = new FirebaseRecyclerAdapter<Developer, DevTopViewHolder>(Developer.class, R.layout.developers_top_card,
                 DevTopViewHolder.class, topDevQuery) {
             @Override
-            protected void populateViewHolder(final DevTopViewHolder viewHolder, final Apk model, final int position) {
+            protected void populateViewHolder(final DevTopViewHolder viewHolder, final Developer model, final int position) {
                 final DatabaseReference devRef = getRef(position);
 
                 // Set click listener for the whole devCard view
@@ -87,6 +88,7 @@ public abstract class DevTopListFragment extends Fragment {
                         // Launch DevDetailActivity
                         Intent intent = new Intent(getActivity(), DevDetailActivity.class);
                         intent.putExtra(DevDetailActivity.EXTRA_DEV_KEY, devKey);
+//                        intent.putExtra(DevDetailActivity.EXTRA_DEV_NAME);
                         startActivity(intent);
                     }
                 });
