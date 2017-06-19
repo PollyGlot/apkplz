@@ -40,7 +40,6 @@
                 android:layout_centerVertical="false"
                 android:background="@drawable/ic_image"
                 android:backgroundTint="@color/colorPrimary"
-                android:baselineAlignBottom="false"
                 android:fitsSystemWindows="false"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>

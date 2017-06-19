@@ -18,9 +18,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/APKPLZTheme">
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
+
+        <service
+            android:name=".NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -60,7 +68,13 @@
         <activity android:name=".AboutActivity">
         </activity>
 
+        <activity android:name=".SettingsActivity">
+        </activity>
+
         <activity android:name=".DevDetailActivity">
+        </activity>
+
+        <activity android:name=".AppDetailActivity">
         </activity>
     </application>
 

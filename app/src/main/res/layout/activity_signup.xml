@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:fitsSystemWindows="true"
-                                                 tools:context="com.example.pollyglot.apkplz.auth.SignupActivity">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.pollyglot.apkplz.auth.SignupActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -75,13 +76,14 @@
         <Button
             android:id="@+id/sign_up_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:onClick="onSignUpClick"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/button_shape"
             android:text="@string/action_sign_in_short"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+            android:layout_height="54dp"
+            android:layout_marginTop="40dp"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            />
+
     </LinearLayout>
 
     <Button
