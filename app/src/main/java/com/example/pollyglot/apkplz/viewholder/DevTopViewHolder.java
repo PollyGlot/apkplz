@@ -7,14 +7,11 @@ import android.widget.TextView;
 
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.example.pollyglot.apkplz.models.Developer;
 
 public class DevTopViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView devTimeView;
+    public TextView latestUpdate;
     public TextView devNameView;
     public ImageView appView;
     public TextView numAppView;
@@ -22,16 +19,18 @@ public class DevTopViewHolder extends RecyclerView.ViewHolder {
     public DevTopViewHolder(View itemView) {
         super(itemView);
 
-        devTimeView = (TextView) itemView.findViewById(R.id.dev_time);
+        latestUpdate = (TextView) itemView.findViewById(R.id.dev_latest_update_include);
         devNameView = (TextView) itemView.findViewById(R.id.dev_top_title);
-        appView = (ImageView) itemView.findViewById(R.id.dev_app_icon);
-        numAppView = (TextView) itemView.findViewById(R.id.dev_num_of_apps);
+//        appView = (TextView) itemView.findViewById(R.id.dev_app_icon);
+//        numAppView = (TextView) itemView.findViewById(R.id.dev_num_of_apps);
     }
 
-    public void bindToDevTop(Apk apk) {
-        devTimeView.setText("Latest Update " + apk.title);
-        devNameView.setText(apk.developer);
-//        numAppView.setText(appsNumber + " Apps");
+    public void bindToDevTop(Developer dev) {
+
+        latestUpdate.setText(dev.latestUpdate);
+        devNameView.setText(dev.developer);
+//        numAppView.setText(String.valueOf(dev.appsNumber));
+//        numAppView.setText(dev.appsNumber);
 
     }
 }

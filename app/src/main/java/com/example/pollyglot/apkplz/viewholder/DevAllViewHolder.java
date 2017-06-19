@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.pollyglot.apkplz.R;
 import com.example.pollyglot.apkplz.models.Apk;
+import com.example.pollyglot.apkplz.models.Developer;
 
 import java.util.Random;
 
@@ -22,8 +23,8 @@ public class DevAllViewHolder extends RecyclerView.ViewHolder {
         devNameView = (TextView) itemView.findViewById(R.id.dev_all_title);
     }
 
-    public void bindToDevAll(Apk apk) {
-        devNameView.setText(apk.developer);
+    public void bindToDevAll(Developer dev) {
+        devNameView.setText(dev.developer);
     }
 
 }
