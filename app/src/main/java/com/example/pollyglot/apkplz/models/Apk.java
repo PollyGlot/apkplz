@@ -37,9 +37,9 @@ public class Apk {
         this.imageUrl = imageUrl;
         this.fileUrl = fileUrl;
 
-//        HashMap<String, Object> timestampNow = new HashMap<>();
-//        timestampNow.put("timestamp", ServerValue.TIMESTAMP);
-//        this.timestampCreated = timestampNow;
+        HashMap<String, Object> timestampNow = new HashMap<>();
+        timestampNow.put("timestamp", ServerValue.TIMESTAMP);
+        this.timestampCreated = timestampNow;
     }
 
     public String getDeveloper() {
@@ -136,7 +136,7 @@ public class Apk {
 
     @Exclude
     public long getTimestampCreatedLong(){
-        return (long)timestampCreated.get("timestamp");
+        return (long)timestampCreated.get("");
     }
 
     @Exclude
@@ -150,7 +150,8 @@ public class Apk {
         result.put("dpi", dpi);
         result.put("description", description);
         result.put("imageUrl", imageUrl);
-//        result.put("time", timestampCreated);
+        result.put("fileUrl", fileUrl);
+        result.put("time", timestampCreated);
         return result;
     }
 }

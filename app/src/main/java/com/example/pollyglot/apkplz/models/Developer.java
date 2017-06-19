@@ -9,18 +9,18 @@ public class Developer {
 
 
     public String developer;
-    public String information;
-    public String latestApp;
-    public String appsNumber;
+    public String latestUpdate;
+    public int appsNumber;
+
 
     public Developer() {
     }
 
-    public Developer(String developer, String information, String latestApp, String appsNumber) {
+    public Developer(String developer, String latestUpdate, int appsNumber) {
         this.developer = developer;
-        this.information = information;
-        this.latestApp = latestApp;
+        this.latestUpdate = latestUpdate;
         this.appsNumber = appsNumber;
+
     }
 
     public String getDeveloper() {
@@ -31,38 +31,28 @@ public class Developer {
         this.developer = developer;
     }
 
-    public String getInformation() {
-        return information;
+    public String getLatestUpdate() {
+        return latestUpdate;
     }
 
-    public void setInformation(String information) {
-        this.information = information;
+    public void setLatestUpdate(String latestUpdate) {
+        this.latestUpdate = latestUpdate;
     }
 
-    public String getLatestApp() {
-        return latestApp;
-    }
-
-    public void setLatestApp(String latestApp) {
-        this.latestApp = latestApp;
-    }
-
-    public String getAppsNumber() {
+    public int getAppsNumber() {
         return appsNumber;
     }
 
-    public void setAppsNumber(String appsNumber) {
+    public void setAppsNumber(int appsNumber) {
         this.appsNumber = appsNumber;
     }
 
-    @Exclude
-    public Map<String, Object> devMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("dev_name", developer);
-        result.put("information", information);
-        result.put("latest_app", latestApp);
-        result.put("apps_number", appsNumber);
 
-        return result;
-    }
+//    @Exclude
+//    public Map<String, Object> devMap() {
+//        HashMap<String, Object> result = new HashMap<>();
+//        result.put("dev_name", developer);
+//        result.put("latest_update", latestUpdate);
+//        return result;
+//    }
 }
