@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static String SHARE_CONTENT = "A beautiful app designed with Material Design:";
-    public static String EMAIL = "paul.trinko95@gmail.com";
+    public static String EMAIL = "mailto: paul.trinko95@gmail.com";
     public static String FACEBOOK_URL = "https://www.facebook.com/paul.trinko";
     public static String INSTAGRAM_URL = "https://www.instagram.com/polly_glot";
 
@@ -79,10 +79,11 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.email_card:
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SENDTO);
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
 
                 emailIntent.setType("plain/text");
-                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{EMAIL});
+                emailIntent.setData(Uri .parse(EMAIL));
+//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{EMAIL});
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
                 emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
 

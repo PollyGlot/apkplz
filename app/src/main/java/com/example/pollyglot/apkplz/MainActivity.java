@@ -24,15 +24,14 @@ import com.example.pollyglot.apkplz.models.User;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends BaseActivity {
 
@@ -50,7 +49,6 @@ public class MainActivity extends BaseActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mUser;
-    private RecyclerView.OnScrollListener scrollListener;
     private Intent mIntent;
 
     @Override
@@ -64,6 +62,10 @@ public class MainActivity extends BaseActivity {
 
         mIntent = new Intent(this, LoginActivity.class);
 
+//        recyclerView = (RecyclerView) findViewById(R.id.home_apps_list);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("apps");
+
 //        Snackbar snackbar = Snackbar
 //                .make(findViewById(R.id.showSnackbar),
 //                        "Logged in as hello world", Snackbar.LENGTH_LONG);
@@ -74,30 +76,15 @@ public class MainActivity extends BaseActivity {
 //        setSupportActionBar(mToolbar);
 
 
+
         mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent Intent = new Intent(view.getContext(), AddApkActivity.class);
                 view.getContext().startActivity(Intent);
-//                Snackbar snackbar = Snackbar
-//                    .make(findViewById(R.id.main_frame_layout),
-//                        "Logged in as hello world", Snackbar.LENGTH_LONG);
-//                snackbar.show();
             }
         });
-
-//        scrollListener = new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                if (newState > 0) {
-//                    mFab.hide();
-//                } else {
-//                    mFab.show();
-//                }
-//            }
-//        };
 
         mBottomBar = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -106,6 +93,7 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame_layout, HomeFragment.newInstance());
         transaction.commit();
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -153,7 +141,8 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-
+                Intent startSettingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(startSettingsActivity);
                 return true;
 
             case R.id.about:

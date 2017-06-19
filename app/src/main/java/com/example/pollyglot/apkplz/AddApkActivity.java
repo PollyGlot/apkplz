@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 import com.example.pollyglot.apkplz.models.Apk;
 import com.example.pollyglot.apkplz.models.Developer;
-import com.example.pollyglot.apkplz.models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +37,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -58,9 +58,6 @@ public class AddApkActivity extends BaseActivity {
 
     private static final String REQUIRED = "Required";
     private static final String TAG = "AddApkActivity";
-    private static final int SELECT_IMAGE = 0;
-    private static final int SELECT_FILE =  1;
-
 
     private Toolbar mToolbar;
     private Spinner mSpinnerDev;
@@ -85,8 +82,12 @@ public class AddApkActivity extends BaseActivity {
 
     private AlertDialog.Builder alertBuilder;
 
-    //Uri object to store file path
+    //Uri objects to store file path
     private Uri imgPath;
+    private Uri filePath;
+
+    private String downloadFileUrl;
+    private String downloadImageUrl;
 
     private Bitmap selectedImage;
     private TextView mFileTxtView;
@@ -124,7 +125,7 @@ public class AddApkActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         mToolbar.setTitle(R.string.add_apk_title);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -143,7 +144,7 @@ public class AddApkActivity extends BaseActivity {
 
         mBtnChooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("application/vnd.android.package-archive");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -151,7 +152,7 @@ public class AddApkActivity extends BaseActivity {
             }
         });
 
-        mSpinnerDev.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        mSpinnerDev.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
@@ -159,12 +160,12 @@ public class AddApkActivity extends BaseActivity {
                     showDevDialog();
                 }
             }
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        mSpinnerTitle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        mSpinnerTitle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
@@ -172,8 +173,8 @@ public class AddApkActivity extends BaseActivity {
                     showTitleDialog();
                 }
             }
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
@@ -212,7 +213,7 @@ public class AddApkActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> developers = new ArrayList<>();
 
-                for (DataSnapshot developersSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot developersSnapshot : dataSnapshot.getChildren()) {
                     String devName = developersSnapshot.child("developer").getValue(String.class);
                     developers.add(devName);
                 }
@@ -236,7 +237,7 @@ public class AddApkActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> titles = new ArrayList<>();
 
-                for (DataSnapshot titlesSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot titlesSnapshot : dataSnapshot.getChildren()) {
                     String titleName = titlesSnapshot.child("title").getValue(String.class);
                     titles.add(titleName);
                 }
@@ -245,7 +246,7 @@ public class AddApkActivity extends BaseActivity {
                 titles.add(1, "Add title");
 
                 ArrayAdapter<String> titlesAdapter = new ArrayAdapter<>(AddApkActivity.this,
-                        android.R.layout.simple_spinner_item,  titles);
+                        android.R.layout.simple_spinner_item, titles);
                 titlesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mSpinnerTitle.setAdapter(titlesAdapter);
             }
@@ -261,7 +262,7 @@ public class AddApkActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> androidVersions = new ArrayList<>();
 
-                for (DataSnapshot titlesSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot titlesSnapshot : dataSnapshot.getChildren()) {
                     String androidVersion = titlesSnapshot.child("androidVersion").getValue(String.class);
                     androidVersions.add(androidVersion);
                 }
@@ -269,7 +270,7 @@ public class AddApkActivity extends BaseActivity {
                 androidVersions.add(0, "Android version");
 
                 ArrayAdapter<String> androidVersionAdapter = new ArrayAdapter<>(AddApkActivity.this,
-                        android.R.layout.simple_spinner_item,  androidVersions);
+                        android.R.layout.simple_spinner_item, androidVersions);
                 androidVersionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mSpinnerMin.setAdapter(androidVersionAdapter);
                 mSpinnerMax.setAdapter(androidVersionAdapter);
@@ -286,7 +287,7 @@ public class AddApkActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> dpi = new ArrayList<>();
 
-                for (DataSnapshot dpiSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot dpiSnapshot : dataSnapshot.getChildren()) {
                     String androidVersion = dpiSnapshot.child("dpi").getValue(String.class);
                     dpi.add(androidVersion);
                 }
@@ -295,7 +296,7 @@ public class AddApkActivity extends BaseActivity {
 //                androidVersions.add(1, "Add title");
 
                 ArrayAdapter<String> dpiAdapter = new ArrayAdapter<>(AddApkActivity.this,
-                        android.R.layout.simple_spinner_item,  dpi);
+                        android.R.layout.simple_spinner_item, dpi);
                 dpiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mSpinnerDpi.setAdapter(dpiAdapter);
             }
@@ -312,46 +313,46 @@ public class AddApkActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-            switch (requestCode) {
-                case 0:
-                    if (resultCode == RESULT_OK) {
-                        imgPath = data.getData();
-                        try {
-                            selectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), imgPath);
-                            mBtnChooseImage.setBackground(null);
-                            mBtnChooseImage.setImageBitmap(selectedImage);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    imgPath = data.getData();
+                    try {
+                        selectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), imgPath);
+                        mBtnChooseImage.setBackground(null);
+                        mBtnChooseImage.setImageBitmap(selectedImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                }
                 break;
 
-                case 1:
-                    if (resultCode == RESULT_OK) {
-                        Uri uri = data.getData();
-                        String uriString = uri.toString();
-                        File mFile = new File(toString());
-                        String filePath = mFile.getAbsolutePath();
-                        String displayName = null;
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    filePath = data.getData();
+                    String uriString = filePath.toString();
+                    File mFile = new File(toString());
+//                        String filePath = mFile.getAbsolutePath();
+                    String displayName = null;
 
-                        if (uriString.startsWith("content://")) {
-                            try (Cursor cursor = this.getContentResolver().query(uri, null, null, null, null)) {
-                                if (cursor != null && cursor.moveToFirst()) {
-                                    displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                                }
+                    if (uriString.startsWith("content://")) {
+                        try (Cursor cursor = this.getContentResolver().query(filePath, null, null, null, null)) {
+                            if (cursor != null && cursor.moveToFirst()) {
+                                displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                             }
-                        } else if (uriString.startsWith("file://")) {
-                            displayName = mFile.getName();
                         }
-
-                        mFileTxtView.setText(displayName);
+                    } else if (uriString.startsWith("file://")) {
+                        displayName = mFile.getName();
                     }
-                break;
-            }
 
+                    mFileTxtView.setText(displayName);
+                }
+                break;
         }
 
-    private String getImageExt(Uri uri){
+    }
+
+    private String getImageExt(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
@@ -369,13 +370,13 @@ public class AddApkActivity extends BaseActivity {
     }
 
     @SuppressWarnings("VisibleForTests")
-    private void saveTitle(){
+    private void saveTitle() {
         final String titleName = mAddField.getText().toString();
         final String devName = mSpinnerDev.getSelectedItem().toString();
 
         if (imgPath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading");
+            progressDialog.setTitle("Uploading image");
             progressDialog.show();
 
             String path = "app_icons/" + UUID.randomUUID() + ".png";
@@ -386,7 +387,7 @@ public class AddApkActivity extends BaseActivity {
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                    final String downloadUrl = taskSnapshot.getDownloadUrl().toString();
+                    downloadImageUrl = taskSnapshot.getDownloadUrl().toString();
                     mDatabase.child("developers")
                             .orderByChild("developer")
                             .equalTo(devName)
@@ -401,11 +402,49 @@ public class AddApkActivity extends BaseActivity {
 
                                         apk.setTitle(titleName);
                                         apk.setDeveloper(devName);
-                                        apk.setImageUrl(downloadUrl);
+                                        apk.setImageUrl(downloadImageUrl);
 
                                         mDatabase.child("app_titles").child(appKey).setValue(apk);
+
+//                                        mDatabase.child("developers").child(devKey).child("appsNumber")
+//                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(DataSnapshot appsNumber) {
+//                                                for (DataSnapshot child: appsNumber.getChildren()) {
+//                                                    Developer dev = new Developer();
+//
+//                                                    int count = 0;
+//
+//                                                    if (appsNumber.getValue() == null) {
+//                                                        count = 0;
+//                                                    } else {
+//                                                        count++;
+//                                                    }
+//
+//                                                    dev.setAppsNumber(count);
+//                                                    mDatabase.child("developers").child(devKey).child("appsNumber").setValue(dev);
+//                                                }
+////                                                if (appsNumber.getValue() != null) {
+////                                                    int count = (int) appsNumber.getValue();
+////                                                    mDatabase.child("developers").child(devKey).child("appsNumber").setValue(count++);
+////                                                }
+////                                                String counter = (String) appsNumber.getValue();
+////                                                System.out.println("APPS NUMBER =>" + counter);
+////
+////                                                int newCount = Integer.parseInt(counter);
+//
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                            }
+//                                        });
+
                                     }
                                 }
+
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                     Log.w(TAG, "Title add error", databaseError.toException());
@@ -413,7 +452,7 @@ public class AddApkActivity extends BaseActivity {
                             });
 
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Image Uploaded ", Toast.LENGTH_LONG).show();
                 }
             })
                     .addOnFailureListener(new OnFailureListener() {
@@ -431,9 +470,8 @@ public class AddApkActivity extends BaseActivity {
                             progressDialog.setMessage("Upload is " + ((int) progress) + "%");
                         }
                     });
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Failed, choose image first", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -459,12 +497,12 @@ public class AddApkActivity extends BaseActivity {
 //        Toast.makeText(this, "Adding...", Toast.LENGTH_SHORT).show();
 //    }
 
-    private void showTitleDialog(){
+    private void showTitleDialog() {
         View mView = getLayoutInflater().inflate(R.layout.dialog_add, null);
 
         mAddField = (EditText) mView.findViewById(R.id.dialog_add_field);
         alertBuilder.setTitle(mSpinnerTitle.getSelectedItem().toString());
-        alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
+        alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveTitle();
@@ -482,12 +520,12 @@ public class AddApkActivity extends BaseActivity {
         dialog.show();
     }
 
-    private void showDevDialog(){
+    private void showDevDialog() {
         View mView = getLayoutInflater().inflate(R.layout.dialog_add, null);
 
         mAddField = (EditText) mView.findViewById(R.id.dialog_add_field);
         alertBuilder.setTitle(mSpinnerDev.getSelectedItem().toString());
-        alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
+        alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveDev();
@@ -596,7 +634,8 @@ public class AddApkActivity extends BaseActivity {
 //        }
 //    }
 
-    public void upload(){
+    @SuppressWarnings("VisibleForTests")
+    public void upload() {
         final String developer = mSpinnerDev.getSelectedItem().toString();
         final String title = mSpinnerTitle.getSelectedItem().toString();
         final String version = mVersionField.getText().toString();
@@ -605,49 +644,94 @@ public class AddApkActivity extends BaseActivity {
         final String dpi = mSpinnerDpi.getSelectedItem().toString();
         final String whatNew = mWhatNew.getText().toString();
 
-        final String userId = getUid();
-        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-                        User user = dataSnapshot.getValue(User.class);
+        if (filePath != null) {
 
-                        if (user == null) {
-                            // User is null => error
-                            Log.e(TAG, "User " + userId + " is null");
-                            Toast.makeText(AddApkActivity.this,
-                                    "Error: could not fetch user.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Write new apk
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            String strUploading = String.valueOf(R.string.uploading);
+            progressDialog.setTitle(strUploading);
+            progressDialog.show();
 
-                            writeNewApk(developer, title, version, minAndroid,
-                                    maxAndroid, dpi, whatNew, imageUrl, fileUrl);
+            String path = "apk/" + title + "_" + version + ".apk";
+
+            StorageReference riversRef = mStorage.child(path);
+            UploadTask uploadTask = riversRef.putFile(filePath);
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    downloadFileUrl = taskSnapshot.getDownloadUrl().toString();
+
+                    writeNewApk(developer, title, version, minAndroid, maxAndroid,
+                            dpi, whatNew, downloadImageUrl, downloadFileUrl);
+                    progressDialog.dismiss();
+                    String fileUploaded = String.valueOf(R.string.fileUploaded);
+                    Toast.makeText(getApplicationContext(), fileUploaded, Toast.LENGTH_LONG).show();
+                }
+            })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                    }
-                });
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot snapshot) {
+                            String uploadIs = String.valueOf(R.string.uploadIs);
+                            double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                            progressDialog.setMessage(uploadIs + ((int) progress) + "%");
+                        }
+                    });
+        } else {
+            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
+        }
     }
 
-    private void writeNewApk(String developer, String title, String version, String minAndroid,
-                             String maxAndroid, String dpi, String whatNew, String imageUrl, String fileUrl) {
+    private void writeNewApk(String developer, final String title, String version, String minAndroid,
+                             String maxAndroid, String dpi, String whatNew,
+                             String downloadImageUrl, String downloadFileUrl) {
 
+        //
+        // Upload and save to apk file + info
+        //
         String appKey = mDatabase.child("apps").push().getKey();
-        Apk apk = new Apk(developer, title, version, minAndroid, maxAndroid, dpi, whatNew, imageUrl, fileUrl);
+        Apk apk = new Apk(developer, title, version, minAndroid, maxAndroid, dpi, whatNew,
+                downloadImageUrl, downloadFileUrl);
         Map<String, Object> apkValues = apk.apkMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/apps/" + appKey, apkValues);
         mDatabase.updateChildren(childUpdates);
 
-        Toast.makeText(this, "Adding...", Toast.LENGTH_SHORT).show();
-    }
+        //
+        // Save uploaded app title to dev node to show Latest Update in Dev link
+        //
+        final String devName = mSpinnerDev.getSelectedItem().toString();
 
+        mDatabase.child("developers")
+                .orderByChild("developer")
+                .equalTo(devName)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot devSnapshot : dataSnapshot.getChildren()) {
+                            final String devKey = devSnapshot.getKey();
+
+                            mDatabase.child("developers").child(devKey).child("latestUpdate").setValue(title);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Title add error", databaseError.toException());
+                    }
+                });
+
+        // Close Activity
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
