@@ -6,25 +6,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.TabLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 //import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.pollyglot.apkplz.auth.LoginActivity;
 import com.example.pollyglot.apkplz.fragment.DevelopersFragment;
 import com.example.pollyglot.apkplz.fragment.HomeFragment;
-import com.example.pollyglot.apkplz.fragment.PopularFragment;
+import com.example.pollyglot.apkplz.fragment.FavoriteFragment;
 import com.example.pollyglot.apkplz.fragment.ProfileFragment;
 import com.example.pollyglot.apkplz.helper.BottomNavigationViewHelper;
 import com.example.pollyglot.apkplz.models.User;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,7 +106,7 @@ public class MainActivity extends BaseActivity {
                     selectedFragment = DevelopersFragment.newInstance();
                     break;
                 case R.id.navigation_popular:
-                    selectedFragment = PopularFragment.newInstance();
+                    selectedFragment = FavoriteFragment.newInstance();
                     break;
                 case R.id.navigation_profile:
                     selectedFragment = ProfileFragment.newInstance();
