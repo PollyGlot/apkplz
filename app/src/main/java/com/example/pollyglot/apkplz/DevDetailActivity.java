@@ -77,7 +77,6 @@ public class DevDetailActivity extends BaseActivity {
                 Developer dev = dataSnapshot.getValue(Developer.class);
                 mToolbar.setTitle(dev.developer);
                 mLatestAppTitle.setText(dev.latestUpdate);
-//                mAppsNumber.setText(dev.appsNumber);
             }
 
             @Override
