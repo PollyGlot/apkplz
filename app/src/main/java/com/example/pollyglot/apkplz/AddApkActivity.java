@@ -647,8 +647,7 @@ public class AddApkActivity extends BaseActivity {
         if (filePath != null) {
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            String strUploading = String.valueOf(R.string.uploading);
-            progressDialog.setTitle(strUploading);
+            progressDialog.setTitle("Uploading");
             progressDialog.show();
 
             String path = "apk/" + title + "_" + version + ".apk";
@@ -664,7 +663,7 @@ public class AddApkActivity extends BaseActivity {
                     writeNewApk(developer, title, version, minAndroid, maxAndroid,
                             dpi, whatNew, downloadImageUrl, downloadFileUrl);
                     progressDialog.dismiss();
-                    String fileUploaded = String.valueOf(R.string.fileUploaded);
+                    String fileUploaded = String.valueOf("File Uploaded");
                     Toast.makeText(getApplicationContext(), fileUploaded, Toast.LENGTH_LONG).show();
                 }
             })
@@ -679,9 +678,8 @@ public class AddApkActivity extends BaseActivity {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot snapshot) {
-                            String uploadIs = String.valueOf(R.string.uploadIs);
                             double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                            progressDialog.setMessage(uploadIs + ((int) progress) + "%");
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%");
                         }
                     });
         } else {
