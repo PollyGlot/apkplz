@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class ProfileFragment extends Fragment {
 
     private View mView;
     private FirebaseAuth mFirebaseAuth;
@@ -31,9 +31,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private ImageView mAvatar;
     private Bitmap selectedImage;
     private ProfilePictureView profileImage;
-    private TextView mUsername;
-
     Context mContext;
+    private TextView mEmail;
+    private TextView mId;
+    private TextView mProvider;
 
 
     public ProfileFragment() {
@@ -54,31 +55,28 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         View mView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        mAvatar = (ImageView) mView.findViewById(R.id.avatar);
-        mUsername = (TextView) mView.findViewById(R.id.username);
+        mAvatar = (ImageView) mView.findViewById(R.id.avatar_image);
+        mEmail = (TextView) mView.findViewById(R.id.profile_email_text);
+        mId = (TextView) mView.findViewById(R.id.profile_id_text);
+        mProvider = (TextView) mView.findViewById(R.id.profile_provider_text);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mToolbar = (Toolbar) mView.findViewById(R.id.toolbar);
+        mToolbar.setTitle("");
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(mToolbar);
 
-        mUsername.setText(mFirebaseAuth.getCurrentUser().getDisplayName());
+        mToolbar.setTitle(mFirebaseAuth.getCurrentUser().getDisplayName());
+        mEmail.setText(mFirebaseAuth.getCurrentUser().getEmail());
+        mId.setText(mFirebaseAuth.getCurrentUser().getUid());
+        mProvider.setText(mFirebaseAuth.getCurrentUser().getProviderId());
 
-        Glide.with(getActivity().getApplicationContext())
+        Glide.with(mAvatar.getContext().getApplicationContext())
                 .load(mFirebaseAuth.getCurrentUser().getPhotoUrl())
                 .into(mAvatar);
-
         return mView;
-    }
-
-
-
-
-
-    @Override
-    public void onClick(View v) {
     }
 }
