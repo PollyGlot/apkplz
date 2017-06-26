@@ -1,11 +1,17 @@
 package com.example.pollyglot.apkplz;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class AppDetailActivity extends BaseActivity {
 
     private static final String TAG = "AppDetailActivity";
@@ -29,6 +43,13 @@ public class AppDetailActivity extends BaseActivity {
     private ValueEventListener mAppListener;
     private Toolbar mToolbar;
     private ImageView mAppImage;
+    private TextView mVersion;
+    private TextView mDeveloper;
+    private TextView mMinAndroid;
+    private TextView mMaxAndroid;
+    private TextView mWhatNew;
+    private TextView mDpi;
+    private Button mBtnDownload;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +75,14 @@ public class AppDetailActivity extends BaseActivity {
             }
         });
 
-        mAppTitle = (TextView) findViewById(R.id.app_name);
         mAppImage = (ImageView) findViewById(R.id.app_detail_title);
+        mVersion = (TextView) findViewById(R.id.app_detail_version_text);
+        mDeveloper = (TextView) findViewById(R.id.app_detail_dev_text);
+        mMinAndroid = (TextView) findViewById(R.id.app_detail_minandroid_text);
+        mMaxAndroid = (TextView) findViewById(R.id.app_detail_maxandroid_text);
+        mDpi = (TextView) findViewById(R.id.app_detail_dpi_text);
+        mWhatNew = (TextView) findViewById(R.id.app_detail_whatnew_text);
+        mBtnDownload = (Button) findViewById(R.id.btn_download_file);
 
     }
 
@@ -66,14 +93,27 @@ public class AppDetailActivity extends BaseActivity {
         ValueEventListener appListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Apk apk = dataSnapshot.getValue(Apk.class);
+                final Apk apk = dataSnapshot.getValue(Apk.class);
                 mToolbar.setTitle(apk.title);
+                mVersion.setText(apk.version);
+                mDeveloper.setText(apk.developer);
+                mMinAndroid.setText(apk.minAndroidVersion);
+                mMaxAndroid.setText(apk.maxAndroidVersion);
+                mDpi.setText(apk.dpi);
+                mWhatNew.setText(apk.description);
+
+
+
+                mBtnDownload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(apk.fileUrl)));
+                    }
+                });
 
                 Glide.with(mAppImage.getContext())
                         .load(apk.imageUrl)
                         .into(mAppImage);
-
-
             }
 
             @Override
