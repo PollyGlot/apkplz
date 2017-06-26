@@ -14,7 +14,7 @@
     <!-- Navigation Title -->
     <string name="title_home">Home</string>
     <string name="title_developers">Developers</string>
-    <string name="title_popular">Popular</string>
+    <string name="title_favorites">Popular</string>
     <string name="title_profile">Profile</string>
 
     <!-- Fragments -->
@@ -109,4 +109,5 @@
     <string name="uploading">Uploading</string>
     <string name="uploadIs">Upload is&#160;</string>
     <string name="fileUploaded">File Uploaded</string>
+    <string name="btn_download">Download File</string>
 </resources>

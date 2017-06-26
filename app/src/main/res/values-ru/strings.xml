@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">#APKPLZ</string>
     <string name="title_home">Главная</string>
-    <string name="title_popular">Популярное</string>
+    <string name="title_favorites">Избранное</string>
     <string name="title_profile">Профиль</string>
     <string name="toolbar_add_upload">Загрузить</string>
     <string name="toolbar_main_back">Назад</string>
@@ -51,7 +51,7 @@
     <string name="btn_reset_password">Восстановить пароль</string>
     <string name="by">от</string>
     <string name="settings_activity_title">Настройки</string>
-    <string name="latest_update">Недавно обновлено</string>
+    <string name="latest_update">Недавно обновлено&#160;</string>
     <string name="latest_uploads">Недавние загрузки</string>
     <string name="lbl_forgot_password">Забыли пароль?</string>
     <string name="russian_language">Русский</string>
@@ -69,13 +69,17 @@
     <string name="developed_by">Разработал</string>
     <string name="dev_prompt">Выбрать разработчика</string>
     <string name="auth_failed">Ошибка авторизации, проверьте свой email и пароль или зарегистрируйтесь</string>
-    <string name="apps">&#160;приложений</string>
+    <string name="apps">&#160;приложения</string>
     <string name="french_language">Французский</string>
     <string name="instagram">Instagram</string>
     <string name="fragment_profile">Профиль</string>
-    <string name="fragment_popular">Популярное</string>
+    <string name="fragment_popular">К сожалению, пока не работает</string>
     <string name="fragment_home">Главная</string>
     <string name="fragment_developers_top"></string>
     <string name="prompt_password">Пароль (необязательно)</string>
     <string name="facebook">Facebook</string>
+    <string name="dev_detail_latest_update">Недавно обновлено</string>
+    <string name="fileUploaded">Файл загружен</string>
+    <string name="uploading">Идёт загрузка</string>
+    <string name="uploadIs">Загружено&#160;</string>
 </resources>

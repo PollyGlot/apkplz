@@ -7,5 +7,5 @@
     <color name="colorBackground">#fafafafa</color>
     <color name="statusBarColor">#f3f3f3</color>
     <color name="itemIconColor">#009ceb</color>
-    <color name="dividerColor">#eeeeee</color>
+    <color name="dividerColor">#dddddd</color>
 </resources>
