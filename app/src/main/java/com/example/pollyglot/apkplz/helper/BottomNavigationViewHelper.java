@@ -1,4 +1,4 @@
-package com.example.pollyglot.apkplz;
+package com.example.pollyglot.apkplz.helper;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;

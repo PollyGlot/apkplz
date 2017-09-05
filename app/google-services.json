@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "376140751829",
+    "firebase_url": "https://apkplz-7ecbb.firebaseio.com",
+    "project_id": "apkplz-7ecbb",
+    "storage_bucket": "apkplz-7ecbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376140751829:android:276d9fa68d892e73",
+        "android_client_info": {
+          "package_name": "com.example.pollyglot.apkplz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376140751829-dpg6l0o13gpej71ehihrog8fbe8cuo2a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pollyglot.apkplz",
+            "certificate_hash": "5c110a7c1a7578a1135d038faa4f9ca1ca9b402c"
+          }
+        },
+        {
+          "client_id": "376140751829-tobvakn7k0dt9doc4uji75q9n0dp76sv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdfYI4xkalqkbVeiJEykd7a-JvVf1P3BM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376140751829-tobvakn7k0dt9doc4uji75q9n0dp76sv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

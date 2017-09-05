@@ -2,12 +2,34 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.example.pollyglot.apkplz.HomeFragment">
+             tools:context="com.example.pollyglot.apkplz.fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:text="@string/latest_uploads"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/home_apps_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/fragment_home"/>
+        android:background="@color/colorPrimary"
+        android:layout_below="@id/title"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/home_apps_list">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

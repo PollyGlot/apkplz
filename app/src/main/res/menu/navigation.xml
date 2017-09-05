@@ -17,7 +17,7 @@
         android:id="@+id/navigation_popular"
         android:enabled="true"
         android:icon="@drawable/ic_popular"
-        android:title="@string/title_popular"/>
+        android:title="@string/title_favorites"/>
 
     <item
         android:id="@+id/navigation_profile"

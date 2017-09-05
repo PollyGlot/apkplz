@@ -5,39 +5,79 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+
+import com.example.pollyglot.apkplz.auth.LoginActivity;
+import com.example.pollyglot.apkplz.fragment.DevelopersFragment;
+import com.example.pollyglot.apkplz.fragment.HomeFragment;
+import com.example.pollyglot.apkplz.fragment.FavoriteFragment;
+import com.example.pollyglot.apkplz.fragment.ProfileFragment;
+import com.example.pollyglot.apkplz.helper.BottomNavigationViewHelper;
+import com.example.pollyglot.apkplz.models.User;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
-    public static enum Mode {
-        NORMAL, ADD, SEARCH;
-    }
+public class MainActivity extends BaseActivity {
 
-    public static Mode mode;
+    // Another method
+    // https://goo.gl/5YykEB
 
     private Toolbar mToolbar;
+    private User user;
     private BottomNavigationView mBottomBar;
     private FloatingActionButton mFab;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mUser;
+    private Intent mIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mode = Mode.NORMAL;
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mIntent = new Intent(this, LoginActivity.class);
+
+//        recyclerView = (RecyclerView) findViewById(R.id.home_apps_list);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("apps");
+
+//        Snackbar snackbar = Snackbar
+//                .make(findViewById(R.id.showSnackbar),
+//                        "Logged in as hello world", Snackbar.LENGTH_LONG);
+//        snackbar.show();
+
+
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mToolbar);
+
+
 
         mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Intent = new Intent(view.getContext(), AddApk.class);
+                Intent Intent = new Intent(view.getContext(), AddApkActivity.class);
                 view.getContext().startActivity(Intent);
             }
         });
@@ -47,44 +87,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationViewHelper.disableShiftMode(mBottomBar);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, HomeFragment.newInstance());
+        transaction.replace(R.id.main_frame_layout, HomeFragment.newInstance());
         transaction.commit();
 
-        //Used to select an item programmatically
-        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
-
-//        mBottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment selectedFragment = null;
-//                switch (item.getItemId()) {
-//                    case R.id.navigation_home:
-//                        selectedFragment = HomeFragment.newInstance();
-//                        break;
-//                    case R.id.navigation_developers:
-//                        selectedFragment = DevelopersTopFragment.newInstance();
-//                        break;
-//                    case R.id.navigation_popular:
-//                        selectedFragment = PopularFragment.newInstance();
-//                        break;
-//                    case R.id.navigation_profile:
-//                        selectedFragment = ProfileFragment.newInstance();
-//                        break;
-//                }
-//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.commit();
-//                return true;
-//            }
-//
-//        });
-//
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.frame_layout, HomeFragment.newInstance());
-//        transaction.commit();
-
     }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -97,37 +103,56 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = HomeFragment.newInstance();
                     break;
                 case R.id.navigation_developers:
-                    selectedFragment = DevelopersTopFragment.newInstance();
+                    selectedFragment = DevelopersFragment.newInstance();
                     break;
                 case R.id.navigation_popular:
-                    selectedFragment = PopularFragment.newInstance();
+                    selectedFragment = FavoriteFragment.newInstance();
                     break;
                 case R.id.navigation_profile:
                     selectedFragment = ProfileFragment.newInstance();
                     break;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_layout, selectedFragment);
+            transaction.replace(R.id.main_frame_layout, selectedFragment);
             transaction.commit();
             return true;
-
-
         }
     };
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_more) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    //sign out method
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        startActivity(mIntent);
     }
 
+    // Toolbar Items on Main
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent startSettingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(startSettingsActivity);
+                return true;
+
+            case R.id.about:
+                Intent startAboutActivity = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(startAboutActivity);
+                return true;
+
+            case R.id.logout:
+                signOut();
+                return true;
+
+            default:
+                break;
+        }
+        return false;
+    }
 }

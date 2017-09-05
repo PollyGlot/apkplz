@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="compose"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_circle_shortcut"
+        android:shortcutShortLabel="@string/add_apk_title"
+        android:shortcutLongLabel="@string/add_apk_title"
+        android:shortcutDisabledMessage="@string/add_apk_title">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.pollyglot.apkplz"
+            android:targetClass="com.example.pollyglot.apkplz.AddApkActivity"/>
+
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
