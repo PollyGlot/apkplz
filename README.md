@@ -6,7 +6,5 @@ An application to upload and download new versions of Android apps.
 - Android SDK
 - Facebook SDK,
 - Firebase (Authentication, Database, Storage, Cloud Functions)
-- Google Maps API
-- Places API
 - Glide
 - Material Design
